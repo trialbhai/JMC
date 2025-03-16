@@ -1,0 +1,20 @@
+TO HOME
+
+
+
+curl -X GET http://127.0.0.1:5000/home 
+
+
+
+TO SEARCH
+
+
+
+curl -X GET http://127.0.0.1:5000/search?query="service-name"
+
+
+TO SERVICE
+
+
+curl -X GET http://127.0.0.1:5000/service/"service-name"
+
