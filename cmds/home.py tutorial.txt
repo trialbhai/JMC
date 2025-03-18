@@ -10,11 +10,11 @@ TO SEARCH
 
 
 
-curl -X GET http://127.0.0.1:5000/search?query="service-name"
+curl -X GET http://127.0.0.1:5000/home/search?query="service-name"
 
 
 TO SERVICE
 
 
-curl -X GET http://127.0.0.1:5000/service/"service-name"
+curl -X GET http://127.0.0.1:5000/home/service/"service-name"
 

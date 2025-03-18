@@ -23,3 +23,5 @@ AFTER LOGIN
 
 curl -X GET http://127.0.0.1:5000/user/dashboard ^
 -H "Authorization: Bearer
+
+server :  mongod --dbpath ./data/db --bind_ip 127.0.0.1
