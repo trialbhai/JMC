@@ -13,8 +13,15 @@ CORS(app)  # Allow cross-origin requests for mobile apps
 # Load configuration
 app.config.from_object(Config)
 
+# Ensure MongoDB URI is set correctly
+if not app.config.get("MONGO_URI"):
+    raise ValueError("MONGO_URI is not set in Config")
+
 # Initialize MongoDB
 mongo = PyMongo(app)
+
+if not mongo.db:
+    raise ConnectionError("Failed to connect to MongoDB. Check your MONGO_URI.")
 
 # Initialize JWT
 jwt = JWTManager(app)

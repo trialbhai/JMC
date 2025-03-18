@@ -1,0 +1,24 @@
+
+ 1️. Submit Tax Payment (POST /submit-tax)  
+
+curl -X POST http://127.0.0.1:5000/submit-tax \
+     -H "Content-Type: application/json" \
+     -d '{
+          "receipt_no": "12345",
+          "registration_no": "REG123",
+          "firm_name": "ABC Pvt Ltd",
+          "address": "123 Street, City",
+          "mobile_no": "9876543210",
+          "receipt_date": "2025-03-18",
+          "payable_tax_amount": 5000,
+          "selected_amount": 2500
+      }'
+
+2️. Print Tax Receipt (GET /print-receipt/<receipt_no>)  
+
+curl -X GET http://127.0.0.1:5000/print-receipt/12345
+
+
+3️.Search by Registration Number (GET /search-registration/<registration_no>)  
+
+curl -X GET http://127.0.0.1:5000/search-registration/REG123
