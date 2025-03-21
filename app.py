@@ -1,4 +1,5 @@
 import os
+import secrets
 from flask import Flask
 from flask_pymongo import PyMongo
 from flask_jwt_extended import JWTManager
@@ -8,6 +9,7 @@ from config import Config
 from routes.home import home_bp
 from routes.login import login_bp
 from routes.professional_tax import tax_bp  # Import Professional Tax Routes
+from routes.transaction import transaction_bp  # Import Transaction Routes
 
 # Load environment variables from .env file
 load_dotenv()
@@ -18,9 +20,9 @@ CORS(app)  # Allow cross-origin requests for mobile apps
 # Load configuration
 app.config.from_object(Config)
 
-app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb://localhost:27017/your_database")
-mongo = PyMongo(app)  # Initialize PyMongo
-
+# Set up MongoDB URI and JWT secret key from environment variables
+app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb://localhost:27017/mydatabase")
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', secrets.token_hex(32))
 
 # Ensure essential environment variables are set
 if not os.getenv("TOKEN_ENCRYPTION_KEY"):
@@ -39,6 +41,7 @@ jwt = JWTManager(app)
 app.register_blueprint(home_bp, url_prefix="/home")
 app.register_blueprint(login_bp, url_prefix="/auth")
 app.register_blueprint(tax_bp, url_prefix="/services/professional-tax")  # New route for tax payments
+app.register_blueprint(transaction_bp, url_prefix="/services")  # New route for transactions
 
 @app.route("/")
 def health_check():
