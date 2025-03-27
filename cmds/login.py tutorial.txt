@@ -25,3 +25,59 @@ curl -X GET http://127.0.0.1:5000/user/dashboard ^
 -H "Authorization: Bearer
 
 server :  mongod --dbpath ./data/db --bind_ip 127.0.0.1
+
+
+curl -X POST http://127.0.0.1:5000/auth/register 
+     -H "Content-Type: application/json" 
+     -d "{\"username\": \"MEET\", \"password\": \"ABC@123\"}"
+
+
+
+TO LOGIN
+
+
+curl -X POST http://127.0.0.1:5000/auth/login ^
+     -H "Content-Type: application/json" ^
+     -d "{\"username\": \"MEET\", \"password\": \"ABC@123\"}"
+
+
+
+
+
+AFTER LOGIN
+
+
+curl -X GET http://127.0.0.1:5000/user/dashboard ^
+-H "Authorization: Bearer
+
+server :  mongod --dbpath ./data/db --bind_ip 127.0.0.1
+
+
+forgot password 
+
+
+curl -X POST http://127.0.0.1:5000/auth/forgot-password \
+-H "Content-Type: application/json" \
+-d '{
+  "email": "user@example.com"
+}'
+
+
+reset password
+
+curl -X POST http://127.0.0.1:5000/auth/reset-password \
+-H "Content-Type: application/json" \
+-d '{
+  "email": "user@example.com",
+  "otp": 123456,
+  "new_password": "new_secure_password"
+}'
+
+resend otp 
+
+curl -X POST http://127.0.0.1:5000/auth/resend-otp \
+-H "Content-Type: application/json" \
+-d '{
+  "email": "user@example.com"
+}'
+

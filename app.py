@@ -10,6 +10,7 @@ from routes.home import home_bp
 from routes.login import login_bp
 from routes.professional_tax import tax_bp  # Import Professional Tax Routes
 from routes.transaction import transaction_bp  # Import Transaction Routes
+from routes.notification import notification_bp
 
 # Load environment variables from .env file
 load_dotenv()
@@ -40,8 +41,10 @@ jwt = JWTManager(app)
 # Register Blueprints
 app.register_blueprint(home_bp, url_prefix="/home")
 app.register_blueprint(login_bp, url_prefix="/auth")
-app.register_blueprint(tax_bp, url_prefix="/services/professional-tax")  # New route for tax payments
-app.register_blueprint(transaction_bp, url_prefix="/services")  # New route for transactions
+app.register_blueprint(tax_bp, url_prefix="/services/professional-tax")
+app.register_blueprint(transaction_bp, url_prefix="/services")
+app.register_blueprint(notification_bp, url_prefix="/notifications")
+
 
 @app.route("/")
 def health_check():
